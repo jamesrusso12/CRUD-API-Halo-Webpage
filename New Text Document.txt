@@ -1,0 +1,1 @@
+SELECT * FROM `game` g INNER JOIN `game_genres` gg ON genre_id = gg.id INNER JOIN `platforms` p ON platform_id = p.id;

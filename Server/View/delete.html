@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Halo Maps</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<hr />
+
+<body>
+    <div class="island">
+    <h1>Delete Item</h1>
+
+    <hr />
+
+    <div id="delete-confirmation" style="display: none;">
+        <p>Are you sure you want to delete?</p>
+        <button id="confirm-delete" class="red-button">Yes</button>
+        <button id="cancel-delete" class="red-button">No</button>
+    </div>
+
+    <button id="delete" class="button-delete">Delete</button>
+    <div id="successBanner" class="hidden"></div>
+</div>
+<center>
+    <img src="https://pbs.twimg.com/media/FAva0xAWYAE42C0.png" class="ragdoll" />
+</center>
+    <script>
+
+        const errorBanner = document.getElementById('submissionError');
+        let confirmation = 0;
+        const deleteConfirmation = document.getElementById('delete-confirmation');
+        const confirmDeleteButton = document.getElementById('confirm-delete');
+        const cancelDeleteButton = document.getElementById('cancel-delete');
+
+        document.getElementById('delete').addEventListener('click', (event) => {
+            console.log(confirmation);
+            if (confirmation > 0) {
+                deleteForm();
+            } else {
+                deleteConfirmation.style.display = 'block';
+            }
+            confirmation++;
+        });
+
+        confirmDeleteButton.addEventListener('click', () => {
+            deleteForm();
+        });
+
+        cancelDeleteButton.addEventListener('click', () => {
+            deleteConfirmation.style.display = 'none';
+            confirmation = 0;
+        });
+
+        
+
+        function deleteForm() {
+            deleteConfirmation.style.display = 'none';
+            const queryParameters = new URLSearchParams(window.location.search);
+
+            //Settings for FETCH API request
+            let fetchSettings = {
+                method: 'DELETE',
+            };
+
+            //Send FETCH API request
+            fetch("http://localhost/map/" + queryParameters.get('id') + "/", fetchSettings)
+                .then((response) => {
+                    return new Promise((resolve) => response.json()
+                        .then((json) => resolve({
+                            status: response.status,
+                            json,
+                        }))
+                    );
+                })
+                //Logic to display errors on form 
+                .then(({ status, json }) => {
+                    errorBanner.innerHTML = 'Form has errors. Please correct them and resubmit.';
+                    errorBanner.hidden = true;
+                    if (status === 400) {
+                        for (error of json.errors) {
+                            const errorId = error.param + '-error';
+                            console.log(error);
+                            document.getElementById(errorId).innerHTML = error.msg;
+                        }
+                        errorBanner.innerHTML = 'Form has errors. Please correct them and resubmit.';
+                        errorBanner.hidden = false;
+                    } else if (status === 200) {
+                        errorBanner.hidden = true;
+                        successBanner.innerHTML = 'Successfully Deleted';
+                        successBanner.classList.remove('hidden');
+
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+    </script>
+</body>
+
+</html>

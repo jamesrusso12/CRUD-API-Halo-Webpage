@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Halo Maps</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<hr />
+
+<body onload="fetchData()">
+    <div class="island">
+    <h1>Halo Maps</h1>
+
+    <hr />
+
+    <h2>Update</h2>
+
+    <div class="row">
+        <div class="row">
+            <div class="col-2">
+                <label>Map Name</label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="map_name" id="map_name" />
+            </div>
+            <div class="col-5">
+                <div id="map_name-error" class="error-message"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label>What Game</label>
+            </div>
+            <div class="col-5">
+                <input type="number" name="game_id" id="game_id" />
+            </div>
+            <div class="col-5">
+                <div id="game_id-error" class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2">
+                <label>Map Description</label>
+            </div>
+            <div class="col-5">
+                <input type="text" name="map_description" id="map_description" />
+            </div>
+            <div class="col-5">
+                <div id="map_description-error" class="error-message"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <label>What Civilization</label>
+            </div>
+            <div class="col-5">
+                <input type="number" name="civilization_id" id="civilization_id" />
+            </div>
+            <div class="col-5">
+                <div id="civilization_id-error" class="error-message"></div>
+            </div>
+        </div>
+
+
+        <div class="col-5"><button id="update">Update</button></div>
+
+    </div>
+
+    <hr />
+
+    <div id="successBanner" class="success-banner" hidden>
+        Map updated successfully!
+    </div>
+
+</div>
+<center>
+    <img src="https://halo.wiki.gallery/images/thumb/a/a3/H5G-Plasma_Grenade.png/300px-H5G-Plasma_Grenade.png" class="vert-move" />
+</center>
+    <script>
+        function fetchData() {
+            console.log('fetchdata');
+
+            let getParameters = new URLSearchParams(window.location.search);
+
+            let fetchSettings = {
+                method: 'GET',
+            };
+
+            fetch("http://localhost/map/" + getParameters.get('id') + '/', fetchSettings)
+                .then((response) => {
+                    return new Promise((resolve) => response.json()
+                        .then((json) => resolve({
+                            status: response.status,
+                            json,
+                        })
+                        ));
+                })
+                .then(({ status, json }) => {
+                    if (status === 400) {
+                        errorBanner.innerHTML = 'Form has errors. Please correct them and resubmit.';
+                        errorBanner.hidden = false;
+
+                        for (error of json.errors) {
+                            const errorId = error.param + '-error';
+                            console.log(error);
+                            document.getElementById(errorId).innerHTML = error.msg;
+                        }
+                    }
+                    if (status === 200) {
+                        console.log(json);
+                        document.getElementById('map_name').value = json.data[0].map_name;
+                        document.getElementById('game_id').value = json.data[0].game_id;
+                        document.getElementById('map_description').value = json.data[0].map_description;
+                        document.getElementById('civilization_id').value = json.data[0].civilization_id;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            document.getElementById('update').addEventListener('click', (event) => {
+                const formData = new FormData();
+
+                if (document.getElementById('map_name').value.length !== 0) {
+                    formData.append('map_name', document.getElementById('map_name').value);
+                }
+                if (document.getElementById('game_id').value.length !== 0) {
+                    formData.append('game_id', document.getElementById('game_id').value);
+                }
+                if (document.getElementById('map_description').value.length !== 0) {
+                    formData.append('map_description', document.getElementById('map_description').value);
+                }
+                if (document.getElementById('civilization_id').value.length !== 0) {
+                    formData.append('civilization_id', document.getElementById('civilization_id').value);
+                }
+
+                const successBanner = document.createElement('div');
+                successBanner.innerText = 'Update successful';
+                successBanner.style.backgroundColor = 'green';
+                successBanner.style.color = 'white';
+                successBanner.style.padding = '10px';
+                successBanner.style.marginTop = '10px';
+                document.body.insertBefore(successBanner, document.body.firstChild);
+
+
+
+                //Settings for FETCH API request
+                let fetchSettings = {
+                    method: 'PUT',
+                    body: formData
+                };
+
+                //Send FETCH API request
+                fetch("http://localhost/map/" + getParameters.get('id') + '/', fetchSettings)
+                    .then((response) => {
+                        return new Promise((resolve) => response.json()
+                            .then((json) => resolve({
+                                status: response.status,
+                                json,
+                            })
+                            ));
+                    })
+                    //Logic to display errors on form 
+                    .then(({ status, json }) => {
+                        if (status === 400) {
+                            //errorBanner.innerHTML = 'Form has errors. Please correct them and resubmit.';
+                            //errorBanner.hidden = false;
+
+                            for (error of json.errors) {
+                                const errorId = error.param + '-error';
+                                console.log(error);
+                                document.getElementById(errorId).innerHTML = error.msg;
+                            }
+                        }
+                        
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+
+                return;
+            });
+
+
+
+            const isEmpty = (obj) => Object.keys(obj).length === 0;
+
+
+        }
+    </script>
+</body>
+
+</html>

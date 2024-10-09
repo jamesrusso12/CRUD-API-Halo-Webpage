@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Halo Maps</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='style.css'>
+    
+</head>
+
+<body>
+    <div class="laser-left">
+    <div class="laser-right">
+    </div>
+</div>
+<div class="spartanBox spartan">
+    <div class="string">Spartans&nbsp;Never&nbsp;Die</div>
+</div>
+    <div class="island">
+        <div class="titleCard titleText">
+            <h1>Halo Maps</h1>
+        </div>
+
+        <hr />
+
+        <div class="box titleText center">
+            <h1>Insert</h1>
+        </div>
+
+        <div class="row">
+            <div class="row text">
+                <div class="col-2">
+                    <label>Map Name?</label>
+                </div>
+                <div class="col-5">
+                    <input type="text" name="map_name" id="map_name" />
+                </div>
+                <div class="col-5">
+                    <div id="map_name-error" class="error-message"></div>
+                </div>
+            </div>
+            <div class="row text">
+                <div class="col-2">
+                    <label>What Game?</label>
+                </div>
+                <div class="col-5">
+                    <input type="number" name="game_id" id="game_id" />
+                </div>
+                <div class="col-5">
+                    <div id="game_id-error" class="error-message"></div>
+                </div>
+            </div>
+
+            <div class="row text">
+                <div class="col-2">
+                    <label>Map Description</label>
+                </div>
+                <div class="col-5">
+                    <input type="text" name="map_description" id="map_description" />
+                </div>
+                <div class="col-5">
+                    <div id="map_description-error" class="error-message"></div>
+                </div>
+            </div>
+            <div class="row text">
+                <div class="col-2">
+                    <label>What Civilization</label>
+                </div>
+                <div class="col-5">
+                    <input type="number" name="civilization_id" id="civilization_id" />
+                </div>
+                <div class="col-5">
+                    <div id="civilization_id-error" class="error-message"></div>
+                </div>
+            </div>
+
+
+            <div class="col-5"><button id="insert">Add Map</button></div>
+
+        </div>
+        <div class='row'>
+            <div id='submissionError' hidden>&nbsp;</div>
+        </div>
+
+        <div class="Animation">
+            <img class="picture" alt="car"
+                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/796535d5-f954-479a-8b88-3640ded34520/dcp8lrx-2cf7f605-59de-4224-8cac-8df4efd00e41.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzc5NjUzNWQ1LWY5NTQtNDc5YS04Yjg4LTM2NDBkZWQzNDUyMFwvZGNwOGxyeC0yY2Y3ZjYwNS01OWRlLTQyMjQtOGNhYy04ZGY0ZWZkMDBlNDEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.onUUBNCFl2wSMYsNnySGuNOdTe5pUHcezoWJtzxYLMQ" />
+        </div>
+
+
+        <hr />
+
+        <div class="box titleText center">
+            <h1>Search for your map!</h1>
+        </div>
+
+        <div class='row text'>
+            <div class='col-2'>
+                <label>Game of Origin</label>
+            </div>
+            <div class='col-10'>
+                <select id='Game'>
+                    <option value=''></option>
+                    <option value='CE'>Halo CE</option>
+                    <option value='2'>Halo 2</option>
+                    <option value='3'>Halo 3</option>
+                    <option value='3 ODST'>Halo 3 ODST</option>
+                    <option value='Reach'>Halo REACH</option>
+                    <option value='4'>Halo 4</option>
+                    <option value='5'>Halo 5</option>
+                    <option value='infinite'>Halo Infinite</option>
+                </select>
+            </div>
+        </div>
+
+        <div class='row text'>
+            <div class='col-2'>
+                <label>Search Game Name</label>
+            </div>
+            <div class='col-10'>
+                <input id='gamename' type='text' />
+            </div>
+        </div>
+
+        <div class='row text'>
+            <div class='col-2'>
+                <label>Exclude Bungie?</label>
+            </div>
+            <div class='col-10'>
+                <input id='exclude' type='checkbox' />
+            </div>
+        </div>
+
+        <div class='row text'>
+            <div class='col-2'>
+                <label>Sort By Civilization</label>
+            </div>
+            <div class='col-10'>
+                <select id='sort'>
+                    <option value=''></option>
+                    <option value='ASC'>Ascending</option>
+                    <option value='DESC'>Descending</option>
+                </select>
+            </div>
+        </div>
+
+        <div class='row text'>
+            <div class='col-2'>
+                <label>Limit Number of Rows?</label>
+            </div>
+            <div class='col-10'>
+                <select id='limit'>
+                    <option value=''></option>
+                    <option value='5'>Limit to 5</option>
+                    <option value='4'>Limit to 4</option>
+                    <option value='3'>Limit to 3</option>
+                    <option value='2'>Limit to 2</option>
+                    <option value='1'>Limit to 1</option>
+                </select>
+            </div>
+        </div>
+
+        <div class='row button text'>
+            <div class='col-12'>
+                <button id='search'>Search for Games</button>
+            </div>
+        </div>
+
+        <div class="Animation2">
+            <img class="picture" alt="sword"
+                src="https://halo.wiki.gallery/images/5/51/H5G-EnergySword.png" />
+        </div>
+
+        <hr />
+
+        <div id='gameinfo' class='overflow'>
+            Press search for game info.
+        </div>
+    </div>
+
+
+    <script>
+        const isEmpty = (obj) => Object.keys(obj).length === 0;
+        const errorBanner = document.getElementById('submissionError');
+
+        document.getElementById('insert').addEventListener('click', (event) => {
+            const formData = new FormData();
+
+            if (document.getElementById('map_name').value.length !== 0) {
+                formData.append('map_name', document.getElementById('map_name').value);
+            }
+            if (document.getElementById('game_id').value.length !== 0) {
+                formData.append('game_id', document.getElementById('game_id').value);
+            }
+            if (document.getElementById('map_description').value.length !== 0) {
+                formData.append('map_description', document.getElementById('map_description').value);
+            }
+            if (document.getElementById('civilization_id').value.length !== 0) {
+                formData.append('civilization_id', document.getElementById('civilization_id').value);
+            }
+
+
+            //Settings for FETCH API request
+            let fetchSettings = {
+                method: 'POST',
+                body: formData
+            };
+
+            //Send FETCH API request
+            fetch("http://localhost/map/", fetchSettings)
+                .then((response) => {
+                    return new Promise((resolve) => response.json()
+                        .then((json) => resolve({
+                            status: response.status,
+                            json,
+                        })
+                        ));
+                })
+                //Logic to display errors on form 
+                .then(({ status, json }) => {
+                    if (status === 400) {
+                        errorBanner.innerHTML = 'Form has errors. Please correct them and resubmit.';
+                        errorBanner.hidden = false;
+
+                        for (error of json.errors) {
+                            const errorId = error.param + '-error';
+                            console.log(error);
+                            document.getElementById(errorId).innerHTML = error.msg;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+            return;
+        });
+        document.getElementById('search').addEventListener('click', (event) => {
+            //const formData = new FormData();
+            const getParameters = {};
+
+            if (document.querySelector('#exclude:checked')) {
+                //formData.append('exclude', 0);
+                getParameters.exclude = 0;
+            }
+            if (document.getElementById('gamename').value.length !== 0) {
+                //formData.append('gamename', document.getElementById('gamename').value);
+                getParameters.gamename = document.getElementById('gamename').value
+            }
+            if (document.getElementById('Game').value.length !== 0) {
+                //formData.append('Game', document.getElementById('Game').value);
+                getParameters.Game = document.getElementById('Game').value
+            }
+            if (document.getElementById('sort').value.length !== 0) {
+                //formData.append('sort', document.getElementById('sort').value);
+                getParameters.sort = document.getElementById('sort').value
+            }
+            if (document.getElementById('limit').value.length !== 0) {
+                //formData.append('limit', document.getElementById('limit').value);
+                getParameters.limit = document.getElementById('limit').value
+            }
+
+            //Settings for FETCH API request
+            let fetchSettings = {
+                method: 'GET',
+                //body: formData
+            };
+
+            //Send FETCH API request
+            fetch("http://localhost/map/" + (!isEmpty(getParameters) ? '?' + new URLSearchParams(getParameters) : ''), fetchSettings)
+                .then((response) => {
+                    return new Promise((resolve) => response.json()
+                        .then((json) => resolve({
+                            status: response.status,
+                            json,
+                        })
+                        ));
+                })
+                //Logic to display errors on form 
+                .then(({ status, json }) => {
+                    if (status === 200) {
+                        let displayTable = '<table>' +
+                            '<thead>' +
+                            '<tr>' +
+                            '<th >Map Name</th>' +
+                            '<th >Game</th>' +
+                            '<th >Civilization</th>' +
+                            '<th >Civ Origin</th>' +
+                            '<th >Game Studio</th>' +
+                            '<th >Studio Location</th>' +
+                            '<th >Description</th>' +
+                            '<th >Edit</th>' +
+                            '<th >Delete</th>' +
+                            '</tr>' +
+                            '</thead>' +
+                            '<tbody>';
+                        if (typeof json.data !== 'undefined') {
+                            for (row of json.data) {
+                                displayTable += '<tr>' +
+                                    '<td>' + row.map_name + '</td>' +
+                                    '<td>' + row.game_name + '</td>' +
+                                    '<td>' + row.civilization_name + '</td>' +
+                                    '<td>' + row.civilization_home + '</td>' +
+                                    '<td>' + row.studio_name + '</td>' +
+                                    '<td>' + row.studio_location + '</td>' +
+                                    '<td>' + row.map_description + '</td>' +
+                                    '<td><a href="update.html?id=' + row.id + '"> Edit </a></td>' +
+                                    '<td><a href="delete.html?id=' + row.id + '"> Delete </a></td>' +
+                                    '</tr>';
+                            }
+                        }
+                        displayTable += '</tbody></table>';
+                        document.getElementById('gameinfo').innerHTML = displayTable;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
+            return;
+        });                 
+    </script>
+</body>
+
+</html>

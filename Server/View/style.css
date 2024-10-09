@@ -1,0 +1,461 @@
+/** Grid system - https://www.w3schools.com/css/css_rwd_grid.asp **/
+* {
+  box-sizing: border-box;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%;
+  }
+
+  .col-2 {
+    width: 30%;
+  }
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-5 {
+    width: 41.66%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-7 {
+    width: 58.33%;
+  }
+
+  .col-8 {
+    width: 66.66%;
+  }
+
+  .col-9 {
+    width: 75%;
+  }
+
+  .col-10 {
+    width: 41.66%
+  }
+
+  .col-11 {
+    width: 91.66%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+body {
+  background-image: url("img/Background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.island {
+  background-color: grey;
+  width: 800px;
+  margin: auto;
+  padding: 20px;
+  border-style: solid;
+  border-color: #B6C7D6;
+  border-radius: 20px;
+}
+
+/** Image - https://www.w3schools.com/css/css_rwd_grid.asp **/
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/** Overflow (for tables) - https://www.w3schools.com/howto/howto_css_table_responsive.asp **/
+.overflow {
+  overflow-x: auto;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+
+.red-button {
+  font-size: 24px;
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-delete {
+  background-color: red;
+  color: white;
+  font-size: 24px;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/**Animations**/
+
+
+.iframe-container {
+  overflow: hidden;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.iframe-container iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+
+
+.Animation {
+  width: 100px;
+  height: 100px;
+  background-color: transparent;
+  position: relative;
+  animation-name: example;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  display: block;
+}
+
+@keyframes example {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+
+  50% {
+    left: 88%;
+    top: 0px;
+  }
+
+  100% {
+    left: 0px;
+    top: 0px;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+
+.Animation2 {
+  background-color: transparent;
+  position: relative;
+  animation-iteration-count: infinite;
+  animation-name: example;
+  width: 100px;
+  height: 100px;
+  animation: rotate 3s linear infinite;
+  display: block;
+}
+
+@keyframes example {
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+
+  50% {
+    left: 88%;
+    top: 0px;
+  }
+
+  100% {
+    left: 0px;
+    top: 0px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+
+.titleCard {
+  background: 466368;
+  background: linear-gradient(to right bottom, #648880, #293f50);
+  width: auto;
+  margin: auto;
+  padding: 20px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.box {
+  background: linear-gradient(to bottom, #0033cc 0%, #ff00ff 100%);
+  border-style: solid;
+  border-color: black;
+  border-radius: 20px;
+  width: 150px;
+  text-align: center;
+  
+}
+
+.titleText {
+  font-family: monospace;
+  font-size: large;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.text {
+  font-family: monospace;
+  font-size: larger;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Button hover styles */
+button:hover {
+  background-color: #00ff00;
+}
+
+/* Button focus styles (optional) */
+button:focus {
+  outline: none;
+}
+
+/* Button active styles (optional) */
+button:active {
+  transform: translateY(1px);
+}
+
+/* Button with ID myButton styles */
+#insert {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Button with ID myButton hover styles */
+#insert:hover {
+  transform: scale(1.2);
+}
+
+/* Button with ID myButton click styles */
+#insert:active {
+  transform: scale(0.8);
+}
+
+/* Thumbs up animation for button with ID myButton */
+#insert.clicked::after {
+  content: "\2714"; /* Unicode for check mark symbol */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  animation: thumbs-up 1s linear;
+}
+
+/* Keyframes for thumbs up animation */
+@keyframes thumbs-up {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+img.vert-move {
+  -webkit-animation: mover 1s infinite  alternate;
+  animation: mover 1s infinite  alternate;
+}
+img.vert-move {
+  -webkit-animation: mover 1s infinite  alternate;
+  animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(300px); }
+}
+@keyframes mover {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(300px); }
+}
+
+/* Style for the image element */
+img.ragdoll {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: -100px;
+  animation: move-image 4s linear infinite;
+  transform-origin: center center;
+}
+
+/* Keyframes for the rotation animation */
+@keyframes rotate-image {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Keyframes for the movement animation */
+@keyframes move-image {
+  0% {
+    transform: translateX(-100px) rotate(0deg);
+  }
+  50% {
+    transform: translateX(calc(100vw + 100px)) rotate(360deg);
+  }
+  100% {
+    transform: translateX(-100px) rotate(720deg);
+  }
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.spartanBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.spartan {
+  position: relative;
+}
+
+.spartan::before {
+  position: absolute;
+  content: '';
+  width: 20px;
+  bottom: 0px;
+  right: 0px;
+  height: 2px;
+  background: white;
+  animation: animLine 0.5s steps(4) infinite;
+}
+
+@keyframes animLine {
+  0%,
+  75% {
+      opacity: 1;
+  }
+  76%,
+  100% {
+      opacity: 0;
+  }
+}
+
+.spartan .string {
+  font: 55px Arial, sans-serif;
+  position: relative;
+  color: white;
+  animation: animText 10s steps(17) infinite;
+  overflow: hidden;
+}
+
+@keyframes animText {
+  0%,
+  90%,
+  100% {
+      width: 0px;
+  }
+  30%,
+  60% {
+      width: 500px;
+  }
+}
